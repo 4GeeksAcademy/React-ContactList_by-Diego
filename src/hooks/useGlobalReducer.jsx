@@ -1,24 +1,28 @@
-// Import necessary hooks and functions from React.
-import { useContext, useReducer, createContext } from "react";
-import storeReducer, { initialStore } from "../store"  // Import the reducer and the initial state.
 
-// Create a context to hold the global state of the application
-// We will call this global state the "store" to avoid confusion while using local states
-const StoreContext = createContext()
+import { useContext, useReducer, createContext } from "react";
+import { contactReducer } from "../context/contactReducer";
+import { initialContactState } from "../context/contactReducer";
+
+
+
+//Espacio para que los datos "floten" por encima de todas las páginas.
+const ContactContext = createContext()
 
 // Define a provider component that encapsulates the store and warps it in a context provider to 
 // broadcast the information throught all the app pages and components.
-export function StoreProvider({ children }) {
+export const ContactProvider = ({ children }) => {
     // Initialize reducer with the initial state.
-    const [store, dispatch] = useReducer(storeReducer, initialStore())
+    const [state, dispatch] = useReducer(contactReducer, initialContactState);
     // Provide the store and dispatch method to all child components.
-    return <StoreContext.Provider value={{ store, dispatch }}>
+    return (
+    <ContactContext.Provider value={{ state, dispatch }}>
         {children}
-    </StoreContext.Provider>
+    </ContactContext.Provider>
+)
 }
 
 // Custom hook to access the global state and dispatch function.
 export default function useGlobalReducer() {
-    const { dispatch, store } = useContext(StoreContext)
-    return { dispatch, store };
+    return useContext(ContactContext)
+
 }
