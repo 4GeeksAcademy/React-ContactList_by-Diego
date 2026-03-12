@@ -1,7 +1,7 @@
 
 import { useContext, useReducer, createContext } from "react";
-import { contactReducer } from "../context/contactReducer";
-import { initialContactState } from "../context/contactReducer";
+import { contactReducer } from "../store";
+import { initialContactState } from "../store";
 
 
 

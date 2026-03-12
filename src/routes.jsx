@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { Layout } from "./pages/Layout";
 import { ContactList } from "./pages/ContactList";
-import { ContactForm } from "./pages/ContactData";
+import { ContactForm } from "./pages/ContactForm";
 
 
 export const router = createBrowserRouter(
